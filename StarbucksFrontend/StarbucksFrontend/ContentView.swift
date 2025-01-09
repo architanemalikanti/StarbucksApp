@@ -97,54 +97,55 @@ struct ContentView: View {
 }
 
 struct ShiftLeadView: View {
-    
+    @StateObject private var viewModel = RegisterShiftLeadViewModel() // View model instance
+
     var body: some View {
-        
         VStack {
-            // Centered Welcome Text
+            // Welcome Text
             Text("Welcome Shift Leads!")
-                .font(.title) // Smaller than .largeTitle
-                .fontWeight(.light) // Adjust text weight
-                .multilineTextAlignment(.center) // Center text alignment
-                .padding(.top, 40) // Adjust top padding if needed
+                .font(.title)
+                .fontWeight(.light)
+                .multilineTextAlignment(.center)
+                .padding(.top, 40)
             
             Form {
-                TextField("Full Name", text: $name)
+                // Bind each field to the view model's properties
+                TextField("Full Name", text: $viewModel.name)
                     .textFieldStyle(DefaultTextFieldStyle())
                     .autocorrectionDisabled()
-                
-                TextField("Username", text: $username)
+
+                TextField("Username", text: $viewModel.username)
                     .textFieldStyle(DefaultTextFieldStyle())
-                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    .autocapitalization(.none)
                     .autocorrectionDisabled()
-                
-                SecureField("Password", text: $password)
-                    .textFieldStyle(DefaultTextFieldStyle())
-                    .autocorrectionDisabled()
-                
-                TextField("Starbucks Location", text: $starbucksLocation)
+
+                SecureField("Password", text: $viewModel.password)
                     .textFieldStyle(DefaultTextFieldStyle())
                     .autocorrectionDisabled()
-                
+
+                TextField("Starbucks Location", text: $viewModel.starbucksLocation)
+                    .textFieldStyle(DefaultTextFieldStyle())
+                    .autocorrectionDisabled()
+
                 SBButton(
                     title: "Create Account",
                     background: .green
                 ) {
-                    //attempt registration
+                    viewModel.register() // Call the register function
                 }
                 .padding()
             }
-            
-            
-            
+
+            Spacer() // Push content downwards
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        Spacer() // Pushes remaining content downwards
     }
 }
 
+
 // Dummy BaristaView
 struct BaristaView: View {
+    @StateObject private var viewModel = RegisterBaristaViewModel() // View model instance
     
     @State private var name: String = ""
     @State private var email: String = ""
@@ -162,20 +163,20 @@ struct BaristaView: View {
                 .padding(.top, 40) // Adjust top padding if needed
             
             Form {
-                TextField("Full Name", text: $name)
+                TextField("Full Name", text: $viewModel.name)
                     .textFieldStyle(DefaultTextFieldStyle())
                     .autocorrectionDisabled()
                 
-                TextField("Username", text: $username)
+                TextField("Username", text: $viewModel.username)
                     .textFieldStyle(DefaultTextFieldStyle())
                     .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                     .autocorrectionDisabled()
                 
-                SecureField("Password", text: $password)
+                SecureField("Password", text: $viewModel.password)
                     .textFieldStyle(DefaultTextFieldStyle())
                     .autocorrectionDisabled()
                 
-                TextField("Starbucks Location", text: $starbucksLocation)
+                TextField("Starbucks Location", text: $viewModel.starbucksLocation)
                     .textFieldStyle(DefaultTextFieldStyle())
                     .autocorrectionDisabled()
                 
@@ -184,6 +185,7 @@ struct BaristaView: View {
                     background: .green
                 ) {
                     //attempt registration
+                    viewModel.register() // Call the register function
                 }
                 .padding()
             }

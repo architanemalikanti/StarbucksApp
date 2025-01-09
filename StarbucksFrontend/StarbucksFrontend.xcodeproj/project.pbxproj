@@ -14,6 +14,8 @@
 		89EDFCEA2D2CC8DC000EDE84 /* SBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDFCE92D2CC8DC000EDE84 /* SBButton.swift */; };
 		89EDFCEC2D2CCFE9000EDE84 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDFCEB2D2CCFE9000EDE84 /* LoginViewModel.swift */; };
 		89EDFCEE2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDFCED2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift */; };
+		89EDFCF02D304C12000EDE84 /* RegisterBaristaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDFCEF2D304C12000EDE84 /* RegisterBaristaViewModel.swift */; };
+		89EDFCF22D30583E000EDE84 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89EDFCF12D30583E000EDE84 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		89EDFCE92D2CC8DC000EDE84 /* SBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBButton.swift; sourceTree = "<group>"; };
 		89EDFCEB2D2CCFE9000EDE84 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		89EDFCED2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterShiftLeadViewModel.swift; sourceTree = "<group>"; };
+		89EDFCEF2D304C12000EDE84 /* RegisterBaristaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterBaristaViewModel.swift; sourceTree = "<group>"; };
+		89EDFCF12D30583E000EDE84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +45,8 @@
 		89EDFCCF2D2A08CB000EDE84 = {
 			isa = PBXGroup;
 			children = (
+				89EDFCF12D30583E000EDE84 /* Info.plist */,
+				89EDFCEF2D304C12000EDE84 /* RegisterBaristaViewModel.swift */,
 				89EDFCED2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift */,
 				89EDFCDA2D2A08CB000EDE84 /* StarbucksFrontend */,
 				89EDFCD92D2A08CB000EDE84 /* Products */,
@@ -136,6 +142,7 @@
 			files = (
 				89EDFCE32D2A08CC000EDE84 /* Preview Assets.xcassets in Resources */,
 				89EDFCE02D2A08CC000EDE84 /* Assets.xcassets in Resources */,
+				89EDFCF22D30583E000EDE84 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89EDFCF02D304C12000EDE84 /* RegisterBaristaViewModel.swift in Sources */,
 				89EDFCEC2D2CCFE9000EDE84 /* LoginViewModel.swift in Sources */,
 				89EDFCDE2D2A08CB000EDE84 /* ContentView.swift in Sources */,
 				89EDFCDC2D2A08CB000EDE84 /* StarbucksFrontendApp.swift in Sources */,

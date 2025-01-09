@@ -38,7 +38,7 @@ class Barista(db.Model):
         """
         initialize an assignment object
         """
-        self.fullName=kwargs.get("code", "")
+        self.fullName=kwargs.get("fullName", "")
         self.profilePictureUrl = kwargs.get("profilePictureUrl", "")
         self.starbucksLocation = kwargs.get("starbucksLocation", "")
         self.userName = kwargs.get("userName", "")
@@ -79,8 +79,7 @@ class Barista(db.Model):
     def simple_serialize(self):
         return{
             "id": self.id,
-            "firstName": self.firstName,
-            "lastName": self.lastName,
+            "firstName": self.fullName,
             "profilePictureUrl": self.profilePictureUrl,
             "starbucksLocation": self.starbucksLocation
         }
@@ -90,10 +89,10 @@ def create_barista(userName, password, fullName, starbucksLocation):
     if existing_barista:
         return False, None
     
-    Barista=Barista(userName=userName, password=password, fullName=fullName, starbucksLocation=starbucksLocation)
-    db.session.add(Barista)
+    newBarista=Barista(userName=userName, password=password, fullName=fullName, starbucksLocation=starbucksLocation)
+    db.session.add(newBarista)
     db.session.commit()
-    return True, Barista
+    return True, newBarista
 
 def verify_credentials(userName, password):
     existing_barista= Barista.query.filter(Barista.userName==userName).first()
@@ -231,7 +230,7 @@ class PastryPull(db.Model):
 
 
     #which barista did the pull:
-    baristaWhoDidThePull = db.Column(db.String, db.ForeignKey('baristas.id'), nullable=False)
+    baristaWhoDidThePull = db.Column(db.Integer, db.ForeignKey('baristas.id'), nullable=False)
 
 
     #now we need to initialize this object

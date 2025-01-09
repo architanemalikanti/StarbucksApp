@@ -95,6 +95,30 @@ def create_barista(userName, password, fullName, starbucksLocation):
     db.session.commit()
     return True, Barista
 
+def verify_credentials(userName, password):
+    existing_barista= Barista.query.filter(Barista.userName==userName).first()
+    if not existing_barista:
+        return False, None
+    
+    return existing_barista.verify_password(password), existing_barista
+
+def renew_session(update_token):
+    existing_barista= Barista.query.filter(Barista.update_token==update_token).first()
+    if not existing_barista:
+        return False, None
+    
+    existing_barista.renew_session()
+    db.session.commit()
+    return True, existing_barista
+
+
+def verify_session(session_token):
+    return Barista.query.filter(Barista.session_token==session_token).first()
+
+
+
+
+
     
 
 

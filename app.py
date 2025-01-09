@@ -28,7 +28,11 @@ def failure_response(error, status=404):
     return json.dumps({"error": error}), status
 
 def extract_token(request):
-    pass #TODO: implement this function
+    token=request.headers.get("Authorization")
+    if token is None:
+        return False, "Missing authorization header"
+    token=token.replace("Bearer", "").strip()
+    return True, token
 
 #register barista route:
 @app.route("/registerBarista/", methods=["POST"])
@@ -39,7 +43,7 @@ def register_barista():
     password = body.get('password')
     starbucksLocation = body.get('starbucksLocation')
 
-    created, user=create_barista(userName, password, fullName, starbucksLocation)
+    created, user= create_barista(userName, password, fullName, starbucksLocation)
 
     if not created:
         return failure_response("User already exists", 403)
@@ -60,7 +64,64 @@ def register_ShiftLead():
 #log in user route:
 @app.route("/login/", methods=["POST"])
 def login():
-    pass #TODO: implement this function 
+    body = json.loads(request.data)
+    fullName=body.get('fullName')
+    userName = body.get('userName')
+    password = body.get('password')
+    starbucksLocation = body.get('starbucksLocation')
+
+    valid_creds, user= verify_credentials(userName, password)
+
+    if not valid_creds:
+        return failure_response("Invalid credentials")
+    
+    return success_response({
+        "session_token": user.session_token,
+        "session_expiration": str(user.session_expiration),
+        "update_token": user.update_token
+
+    })
+
+#register log in route:
+@app.route("/session/", methods=["POST"])
+def update_session():
+    success, update_token=extract_token(request)
+
+    if not success:
+        return failure_response(update_token)
+    
+
+    valid, user=renew_session(update_token)
+
+    if not valid:
+        return failure_response("Invalid update token")
+    
+    return success_response({
+        "session_token": user.session_token,
+        "session_expiration": str(user.session_expiration),
+        "update_token": user.update_token
+    })
+
+@app.route("/secret/", methods=["GET"])
+def secret_message():
+    success, session_token =extract_token(request)
+
+    if not success:
+        return failure_response(session_token)
+    
+    valid=verify_session(session_token)
+
+    if not  valid:
+        return failure_response("Invalid session token")
+    
+    return success_response("Hello World!")
+
+
+
+
+
+
+    
 
 
 

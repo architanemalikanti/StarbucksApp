@@ -64,6 +64,7 @@ class Barista(db.Model):
     def verify_update_token(self, update_token):
         return update_token == self.update_token
 
+
     #serialize method
     def serialize(self):
         return{
@@ -84,6 +85,15 @@ class Barista(db.Model):
             "starbucksLocation": self.starbucksLocation
         }
     
+def create_barista(userName, password, fullName, starbucksLocation):
+    existing_barista= Barista.query.filter(Barista.userName==userName).first()
+    if existing_barista:
+        return False, None
+    
+    Barista=Barista(userName=userName, password=password, fullName=fullName, starbucksLocation=starbucksLocation)
+    db.session.add(Barista)
+    db.session.commit()
+    return True, Barista
 
     
 

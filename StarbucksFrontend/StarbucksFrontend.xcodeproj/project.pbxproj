@@ -11,6 +11,9 @@
 		89EDFCDE2D2A08CB000EDE84 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDFCDD2D2A08CB000EDE84 /* ContentView.swift */; };
 		89EDFCE02D2A08CC000EDE84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89EDFCDF2D2A08CC000EDE84 /* Assets.xcassets */; };
 		89EDFCE32D2A08CC000EDE84 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89EDFCE22D2A08CC000EDE84 /* Preview Assets.xcassets */; };
+		89EDFCEA2D2CC8DC000EDE84 /* SBButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDFCE92D2CC8DC000EDE84 /* SBButton.swift */; };
+		89EDFCEC2D2CCFE9000EDE84 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDFCEB2D2CCFE9000EDE84 /* LoginViewModel.swift */; };
+		89EDFCEE2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EDFCED2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		89EDFCDD2D2A08CB000EDE84 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		89EDFCDF2D2A08CC000EDE84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89EDFCE22D2A08CC000EDE84 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		89EDFCE92D2CC8DC000EDE84 /* SBButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBButton.swift; sourceTree = "<group>"; };
+		89EDFCEB2D2CCFE9000EDE84 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		89EDFCED2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterShiftLeadViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +41,7 @@
 		89EDFCCF2D2A08CB000EDE84 = {
 			isa = PBXGroup;
 			children = (
+				89EDFCED2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift */,
 				89EDFCDA2D2A08CB000EDE84 /* StarbucksFrontend */,
 				89EDFCD92D2A08CB000EDE84 /* Products */,
 			);
@@ -53,8 +60,10 @@
 			children = (
 				89EDFCDB2D2A08CB000EDE84 /* StarbucksFrontendApp.swift */,
 				89EDFCDD2D2A08CB000EDE84 /* ContentView.swift */,
+				89EDFCE92D2CC8DC000EDE84 /* SBButton.swift */,
 				89EDFCDF2D2A08CC000EDE84 /* Assets.xcassets */,
 				89EDFCE12D2A08CC000EDE84 /* Preview Content */,
+				89EDFCEB2D2CCFE9000EDE84 /* LoginViewModel.swift */,
 			);
 			path = StarbucksFrontend;
 			sourceTree = "<group>";
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89EDFCEC2D2CCFE9000EDE84 /* LoginViewModel.swift in Sources */,
 				89EDFCDE2D2A08CB000EDE84 /* ContentView.swift in Sources */,
 				89EDFCDC2D2A08CB000EDE84 /* StarbucksFrontendApp.swift in Sources */,
+				89EDFCEA2D2CC8DC000EDE84 /* SBButton.swift in Sources */,
+				89EDFCEE2D2DB302000EDE84 /* RegisterShiftLeadViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

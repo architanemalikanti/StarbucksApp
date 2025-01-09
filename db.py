@@ -1,5 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+import hashlib
+import os
+import bcrypt
 
 db = SQLAlchemy()
 
@@ -13,13 +16,21 @@ association_table = db.Table("association", db.Model.metadata,
 class Barista(db.Model):
     #name of model
     __tablename__ = "baristas"
-    #columns
+    #user information:
     id= db.Column(db.Integer, primary_key=True, autoincrement=True)
-    firstName = db.Column(db.String, nullable=False)
-    lastName = db.Column(db.String, nullable=False)
+    fullName = db.Column(db.String, nullable=False)
+    userName = db.Column(db.String, nullable=False)
     profilePictureUrl = db.Column(db.String, nullable=False)
     starbucksLocation = db.Column(db.String, nullable=False) #assuming that the starbucks location is a string
     shiftLead=db.relationship("ShiftLead", secondary=association_table,back_populates="baristas")
+    password_digest = db.Column(db.String, nullable=False)
+
+    #session information:
+    session_token = db.Column(db.String, nullable=False)
+    session_expiration = db.Column(db.DateTime, nullable=False)
+    update_token = db.Column(db.String, nullable=False, unique=True)
+
+
 
     #now we need to initialize this object and serialize it
     #initialize:
@@ -27,18 +38,37 @@ class Barista(db.Model):
         """
         initialize an assignment object
         """
-        self.firstName=kwargs.get("code", "")
-        self.lastName=kwargs.get("name", "")
+        self.fullName=kwargs.get("code", "")
         self.profilePictureUrl = kwargs.get("profilePictureUrl", "")
         self.starbucksLocation = kwargs.get("starbucksLocation", "")
+        self.userName = kwargs.get("userName", "")
+        self.password_digest= bcrypt.hashpw(kwargs.get("password").encode("utf-8"), bcrypt.gensalt(rounds=13))
+        self.renew_session()
 
+    #used to randomly generate/update session tokens:
+    def _urlsafe_base_64(self):
+        return hashlib.sha1(os.urandom(64)).hexdigest()
+    
+    def renew_session(self):
+        self.session_token=self._urlsafe_base_64()
+        self.session_expiration=datetime.datetime.now()+datetime.timedelta(days=1)
+        self.update_token=self._urlsafe_base_64()
+
+    def verify_password(self, password):
+        return bcrypt.checkpw(password.encode("utf-8"), self.password_digest)
+    
+    #checks if session token is valid and hasnt expired:
+    def verify_session_token(self, session_token):
+        return session_token == self.session_token and datetime.datetime.now() < self.session_expiration
+    
+    def verify_update_token(self, update_token):
+        return update_token == self.update_token
 
     #serialize method
     def serialize(self):
         return{
             "id": self.id,
-            "firstName": self.firstName,
-            "lastName": self.lastName,
+            "fullName": self.fullName,
             "profilePictureUrl": self.profilePictureUrl,
             "starbucksLocation": self.starbucksLocation,
             "shiftLead": [s.simple_serialize() for s in self.shiftLead]
@@ -53,6 +83,8 @@ class Barista(db.Model):
             "profilePictureUrl": self.profilePictureUrl,
             "starbucksLocation": self.starbucksLocation
         }
+    
+
     
 
 

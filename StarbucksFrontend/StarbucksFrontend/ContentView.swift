@@ -145,7 +145,7 @@ struct ShiftLeadView: View {
 
 // Dummy BaristaView
 struct BaristaView: View {
-    @StateObject private var viewModel = RegisterBaristaViewModel() // View model instance
+    @StateObject var viewModel = RegisterBaristaViewModel() // View model instance
     
     @State private var name: String = ""
     @State private var email: String = ""
